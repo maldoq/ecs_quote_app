@@ -57,58 +57,26 @@ def quote_card(request, user_id):
     })
 
 def generate_card_image(user_quote):
-    # Taille de la carte
     WIDTH, HEIGHT = 800, 500
-
-    # Image de fond
     image = Image.new('RGB', (WIDTH, HEIGHT), '#1e3c72')
     draw = ImageDraw.Draw(image)
 
     # Police
-    font_path = os.path.join(settings.BASE_DIR, 'static/fonts/arial.ttf')
+    font_path = 'static/fonts/arial.ttf'
     title_font = ImageFont.truetype(font_path, 36)
     text_font = ImageFont.truetype(font_path, 24)
-    small_font = ImageFont.truetype(font_path, 20)
 
-    # Texte
     draw.text((300, 40), "ECS 2026", fill='white', font=title_font)
-
-    quote_text = f"❝ {user_quote.quote.text} ❞"
-    draw.multiline_text(
-        (60, 140),
-        quote_text,
-        fill='white',
-        font=text_font,
-        align='center',
-        spacing=6
-    )
-
-    draw.text(
-        (60, 260),
-        f"— {user_quote.quote.author}",
-        fill='#ffd700',
-        font=small_font
-    )
-
-    draw.text(
-        (60, 340),
-        f"{user_quote.prenom} {user_quote.nom}",
-        fill='white',
-        font=text_font
-    )
-
-    draw.text(
-        (60, 380),
-        user_quote.ecole,
-        fill='white',
-        font=small_font
-    )
+    draw.multiline_text((60, 140), f"❝ {user_quote.quote.text} ❞", fill='white', font=text_font)
+    draw.text((60, 260), f"— {user_quote.quote.author}", fill='#ffd700', font=text_font)
+    draw.text((60, 340), f"{user_quote.prenom} {user_quote.nom}", fill='white', font=text_font)
+    draw.text((60, 380), user_quote.ecole, fill='white', font=text_font)
 
     # Sauvegarde en mémoire
     buffer = io.BytesIO()
     image.save(buffer, format='PNG')
 
-    # Enregistrer dans le champ ImageField
+    # Upload automatique sur Cloudinary via ImageField
     user_quote.card_image.save(
         f'citation_{user_quote.id}.png',
         ContentFile(buffer.getvalue()),
