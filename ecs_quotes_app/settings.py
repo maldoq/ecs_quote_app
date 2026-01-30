@@ -129,3 +129,19 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Cloudinary
+INSTALLED_APPS += [
+    'cloudinary',
+    'cloudinary_storage',
+]
+     
+# Config Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dhf6pghq6',
+    'API_KEY': '962848891394146',
+    'API_SECRET': '<your_api_secret>',
+}
+
+# Stockage par défaut des fichiers Media
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
