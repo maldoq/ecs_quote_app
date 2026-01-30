@@ -1,0 +1,1 @@
+web: gunicorn ecs_quotes_app.wsgi
