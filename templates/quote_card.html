@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ma Citation - ECS{% endblock %}
+
+{% block content %}
+<div class="quote-card-page">
+    <div class="logo-container">
+        <div class="logo">ECS</div>
+    </div>
+    
+    <div class="card-container">
+        <div class="quote-card" id="quoteCard">
+            <div class="card-header">
+                <h2>Ta Citation 2026</h2>
+            </div>
+            
+            <div class="card-body">
+                <div class="quote-icon">❝</div>
+                <p class="quote-text">{{ user_quote.quote.text }}</p>
+                <p class="quote-author">— {{ user_quote.quote.author }}</p>
+            </div>
+            
+            <div class="card-footer">
+                <p class="user-name">{{ user_quote.prenom }} {{ user_quote.nom }}</p>
+                <p class="user-info">{{ user_quote.ecole }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="action-buttons">
+        <a href="{% url 'download_card' user_quote.id %}" class="download-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Télécharger ma carte
+        </a>
+        
+        <a href="{% url 'landing' %}" class="back-button">Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<p>L'empreinte d'expertise te souhaite une bonne année</p>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/download.js' %}"></script>
+<script>
+    const userId = {{ user_quote.id }};
+</script>
+{% endblock %}

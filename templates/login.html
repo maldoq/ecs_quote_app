@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Connexion - ECS{% endblock %}
+
+{% block content %}
+<div class="login-content">
+    <div class="logo-container">
+        <div class="logo">ECS</div>
+    </div>
+    
+    <div class="instruction-text">
+        <p>Remplis le formulaire ci-dessous pour découvrir ta citation inspirante pour 2026</p>
+    </div>
+    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <form method="post" class="quote-form" id="quoteForm">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.nom.id_for_label }}">{{ form.nom.label }}</label>
+            {{ form.nom }}
+            {% if form.nom.errors %}
+                <span class="error">{{ form.nom.errors.0 }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.prenom.id_for_label }}">{{ form.prenom.label }}</label>
+            {{ form.prenom }}
+            {% if form.prenom.errors %}
+                <span class="error">{{ form.prenom.errors.0 }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.ecole.id_for_label }}">{{ form.ecole.label }}</label>
+            {{ form.ecole }}
+            {% if form.ecole.errors %}
+                <span class="error">{{ form.ecole.errors.0 }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <span class="error">{{ form.email.errors.0 }}</span>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="submit-button">Voir ma carte</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/form-validation.js' %}"></script>
+{% endblock %}

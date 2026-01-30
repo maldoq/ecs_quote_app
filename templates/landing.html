@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Bienvenue - ECS{% endblock %}
+
+{% block content %}
+<div class="landing-content">
+    <div class="logo-container">
+        <div class="logo">ECS</div>
+    </div>
+    
+    <div class="welcome-text">
+        <h1>Bienvenue chez l'Empreinte d'Expertise !</h1>
+        <p class="welcome-message">
+            Nous sommes heureux de t'avoir parmi nous et te souhaitons au passage une merveilleuse année 2026.
+        </p>
+        <p class="motivation-text">
+            Nous avons préparé rien que pour toi une citation qui pourrait bien t'être une source de motivation pendant l'année.
+        </p>
+    </div>
+    
+    <div class="cta-container">
+        <a href="{% url 'login' %}" class="cta-button">Découvrir ma citation</a>
+    </div>
+</div>
+{% endblock %}

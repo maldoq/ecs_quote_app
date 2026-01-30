@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ECS - L'Empreinte d'Expertise{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="confetti-container" id="confettiContainer"></div>
+    
+    <div class="main-container">
+        {% block content %}{% endblock %}
+        
+        <footer class="footer">
+            {% block footer %}
+            <p>ECS, Une empreinte d'expertise</p>
+            {% endblock %}
+        </footer>
+    </div>
+    
+    <script src="{% static 'js/confetti.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
